@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl -w
-BEGIN { unshift @INC, "/cgi-bin/lib", "lib" };
+BEGIN { unshift @INC, "lib" };
 
 use strict;
 use CGI;
