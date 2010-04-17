@@ -143,6 +143,9 @@ th {
 <body>
   <img id="loading" src="loading.gif" alt="" title="" style="display:none;">
   <div id="fileList">
+  <p>
+  <strong>ファイルをアップロードするとここに一覧が表示されます</strong>
+  </p>
   </div>
 <div>
 <ul>

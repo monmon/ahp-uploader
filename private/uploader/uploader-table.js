@@ -9,19 +9,8 @@ UploaderTable.make = function(fileOf) {
 	var self = this;  // UploaderTable
 	var hiddenClass = self.hiddenClass;
 
-	var $table = $('<table/>')
-		.append('<tr/>')
-		.find(':last')
-			.append('<th/>')
-			.find(':last')
-				.text('ファイル名（ダウンロード用リンク）')
-			.end()
-			.append('<th/>')
-			.find(':last')
-				.text('ダウンロード用パスワード')
-			.end()
-		.end();
-	$.each(fileOf, function(id, file){
+	var $table = $('<table/>');
+	var files = $.each(fileOf, function(id, file){
 		var pass = file.pass || 'input pass';
 		var label = file.label || file.file;
 
@@ -64,9 +53,28 @@ UploaderTable.make = function(fileOf) {
 			.end();
 	});
 
+	// ファイルがアップロードされていなければ抜ける
+	if (! files.length) return;
+
+
 	// 描画 + クリックイベント
-	$('#fileList')
-	.append($table)
+	$uable
+	.empty()
+	.appendTo('#fileList')
+	.prepend('<tr/>')
+	.find(':last')
+		.append('<th/>')
+		.find(':last')
+			.text('ファイル名（ダウンロード用リンク）')
+		.end()
+		.append('<th/>')
+		.find(':last')
+			.text('ダウンロード用パスワード')
+		.end()
+	.end()
+
+//	$('#fileList')
+//	.append($table)
 	.find('td')
 		.click(function(e){
 			var targetNodeName = $(e.target).get(0).nodeName;
