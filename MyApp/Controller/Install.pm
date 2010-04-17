@@ -212,7 +212,7 @@ sub _copy_private {
 	my($src_path, $dest_path) = ("$src_dir/$file", "$dest_dir/$file");
 	if (-d $src_path) {            # dir
 	    mkdir $dest_path, 0777      or die "cannot mkdir $dest_path: $!"
-		unless $dest_path;
+		unless -d $dest_path;
 	}
 	else {                         # file
 	    __cp($src_path, $dest_path);

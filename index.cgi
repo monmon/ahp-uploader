@@ -10,6 +10,7 @@ my $get_config = sub {
     my $q = shift or return;
     
     my $cgi_url = $q->url;
+    $cgi_url =~ s{/$}{/index.cgi};
     my($home_num, $user) = ($1, $2) if $cgi_url =~ m{http://hpcgi([0-9])\.nifty\.com/([^/]+)/};
     my $domain           = sprintf('https://homepage%s.nifty.com', $home_num);
     my $base_name        = 'uploader';
