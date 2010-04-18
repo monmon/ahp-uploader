@@ -9,6 +9,9 @@ UploaderTable.make = function(fileOf) {
 	var self = this;  // UploaderTable
 	var hiddenClass = self.hiddenClass;
 
+	// ファイルがアップロードされていなければ抜ける
+	if ($.isEmptyObject(fileOf)) return;
+
 	var $table = $('<table/>');
 	var files = $.each(fileOf, function(id, file){
 		var pass = file.pass || 'input pass';
@@ -53,41 +56,36 @@ UploaderTable.make = function(fileOf) {
 			.end();
 	});
 
-	// ファイルがアップロードされていなければ抜ける
-	if (! files.length) return;
-
 
 	// 描画 + クリックイベント
-	$uable
+	$('#fileList')
 	.empty()
-	.appendTo('#fileList')
-	.prepend('<tr/>')
-	.find(':last')
-		.append('<th/>')
-		.find(':last')
-			.text('ファイル名（ダウンロード用リンク）')
+	.append($table)
+	.find('> table')
+		.prepend('<tr/>')
+		.find('tr:first')
+			.append('<th/>')
+			.find(':last')
+				.text('ファイル名（ダウンロード用リンク）')
+			.end()
+			.append('<th/>')
+			.find(':last')
+				.text('ダウンロード用パスワード')
+			.end()
 		.end()
-		.append('<th/>')
-		.find(':last')
-			.text('ダウンロード用パスワード')
-		.end()
-	.end()
-
-//	$('#fileList')
-//	.append($table)
-	.find('td')
-		.click(function(e){
-			var targetNodeName = $(e.target).get(0).nodeName;
-			if (! /^(?:A|INPUT)$/.test(targetNodeName)) { // AとINPUTの時は何もしない
-				self.editField(this);
-			}
-		})
-		.find('input')
-			.keyup(function(e){
-				if (e.keyCode === 13) {
-					self.commitField(this);
+		.find('td')
+			.click(function(e){
+				var targetNodeName = $(e.target).get(0).nodeName;
+				if (! /^(?:A|INPUT)$/.test(targetNodeName)) { // AとINPUTの時は何もしない
+					self.editField(this);
 				}
-			});
+			})
+			.find('input')
+				.keyup(function(e){
+					if (e.keyCode === 13) {
+						self.commitField(this);
+					}
+				});
 
 }
 // テーブル内フィールドをinputにする、戻す
