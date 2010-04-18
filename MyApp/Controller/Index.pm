@@ -62,16 +62,27 @@ sub get_content {
   <meta charset="utf-8"> 
 </head>
 <body>
+<h1>アップローダ</h1>
+<h2>はじめに</h2>
+<p>
+<a href="$cgi_url/install">こちら</a>からインストール
+</p>
+<h2>ファイルのアップロード、ダウンロード方法</h2>
 <ol>
   <li>
-<a href="$cgi_url/install">インストールする</a>
-  </li>
-  <li>
 ftpで「$manager->{data_dir_path}」配下にファイルをアップロードする<br>
-※日本語ファイルはダメ。あとで修正できるのでその時に日本語にする
+<ul>
+<li>
+※ファイル名は日本語は対応してないので、アップロードするときは英数字のファイル名にする<br>
+例）「資料.zip」ではなく「shiryou-1.zip」などのファイル名にする
+</li>
+</ul>
   </li>
   <li>
   <a href="$domain/$user/$base_name/">ファイル一覧のページ</a>でファイルのダウンロード用パスワードを設定する
+  </li>
+  <li>
+ダウンロード用リンクからファイルをダウンロードする
   </li>
   <li>
 いらなくなったファイルはftpで削除する

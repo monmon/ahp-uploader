@@ -4,15 +4,15 @@ use Carp;
 use Symbol qw(gensym);
 use JSON qw();
 use MyApp::Encrypt;
+use vars qw($SALT $FILE_PATH);
 
-#our $SALT = 'p7';    # 適当
-#our $FILE_PATH = '/private/uploder/data.json';
-$__PACKAGE__::SALT = 'p7';    # 適当
-$__PACKAGE__::FILE_PATH = '/private/uploder/data.json';
+# global
+$SALT = 'p7';    # 適当
+$FILE_PATH = '/private/uploder/data.json';
 
 sub new {
     my $class = shift;
-    my $json_path = shift || $__PACKAGE__::FILE_PATH;
+    my $json_path = shift || $FILE_PATH;
 
     my $data_dir_path = $json_path;
     $data_dir_path =~ s{\.json}{};    # data_dir_pathは.jsonを除いた名前
@@ -73,9 +73,11 @@ sub read {
 sub _get_file_id {
     my $self = shift;
     my $file_name = shift;
-    my $salt = shift || $__PACKAGE__::SALT;
+    my $salt = shift || $SALT;
 
-    MyApp::Encrypt::passwd($file_name, $salt);
+    my $id = MyApp::Encrypt::passwd($file_name, $salt);
+    $id =~ s{[^a-zA-Z0-9]}{}g;
+    $id;
 }
 
 sub _get_file_list {

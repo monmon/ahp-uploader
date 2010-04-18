@@ -127,18 +127,7 @@ sub _make_index {
 <html lang="ja">  
 <head>  
    <meta charset="utf-8"> 
-   <style type="text/css">
-tr, th, td {
-    border: #eee 1px solid;
-    padding: 0 20px;
-}
-th {
-    background-color: #ccc;
-}
-.hidden {
-    display: none;
-}
-   </style>
+   <link rel="stylesheet" href="uploader-table.css" type="text/css" media="all" />
 </head>
 <body>
   <img id="loading" src="loading.gif" alt="" title="" style="display:none;">
@@ -147,21 +136,22 @@ th {
   <strong>ファイルをアップロードするとここに一覧が表示されます</strong>
   </p>
   </div>
+<hr>
 <div>
 <ul>
 <li>
-マス目をクリックすると項目修正モードになります。<br>
+項目をクリックすると編集モードになります。<br>
   <ul>
     <li>
-決定：「Enter」を押す
+編集を決定：「Enter」を押す
     </li>
     <li>
-キャンセル：マス目のスペースをクリック
+編集をキャンセル：項目のスペースをクリック
     </li>
   </ul>
 </li>
 <li>
-ダウンロード時のファイル名を日本語にすることも可能です。<br>
+ファイル名の項目を修正するとダウンロード時のファイル名が日本語になります。<br>
   <ul>
     <li>
 例）「shiryou.zip」→「資料.zip」

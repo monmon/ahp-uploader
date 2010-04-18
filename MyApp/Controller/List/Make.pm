@@ -12,7 +12,7 @@ sub handle_request {
     
     my $content_type = 'application/x-javascript';
 
-    my $cb = $q->param('cb') || 'Table.make';
+    my $cb = $q->param('cb') || 'makeTable';
     my $content = MyApp::Accessor::List::Make->get_content({
         cb     => $cb,
         %{$config},

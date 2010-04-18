@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+.hidden {
+    display: none;
+}
+table {
+    border-collapse: collapse;
+}
+tr, th, td {
+    padding:0 20px;
+}
+tr.odd {
+    background-color:#EEEEFF;
+    border-top:1px solid #6B90DA;
+}
+th  {
+    background-color: #4466AA;
+    background-color: #6B90DA;
+    color:#FFFFFF;
+}
+td {
+    color:#333333;
+}
