@@ -45,7 +45,7 @@ UploaderTable.make = function(fileOf) {
                 .append('<input type="text"/>')
                 .find(':last')
                     .addClass(hiddenClass)
-                    .val(pass)
+                    .val(pass || '')
                 .end()
                 .children()
                     .addClass('pass')

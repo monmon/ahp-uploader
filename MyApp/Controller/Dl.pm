@@ -12,20 +12,35 @@ sub handle_request {
     
     my $dl = MyApp::Accessor::Dl->new({
         id   => $q->param('id') || undef,
-	pass => $q->param('pass') || undef,
+        pass => $q->param('pass') || undef,
         %{$config},
     });
 
     if ($dl->can_download) {      # download OK
+        # ieの場合だけURLエンコード
+        my $ua = $q->user_agent;
+        my $filename = ($ua =~ m{MSIE}) ? __url_encode($dl->{label} || $dl->{id})
+                     :                    $dl->{label} || $dl->{id}
+                     ;
+
         print $q->header(
-            -type       => 'application/octet-stream',
-            -attachment => $dl->{label} || $dl->{id},
+            -type                => 'application/octet-stream',
+            -Content_Disposition => sprintf("attachment; filename=%s", $filename),
         );
-	$dl->process;
+        $dl->process;
     }
     else {                        # show passward field
-	('text/html', $dl->get_content);
+        ('text/html', $dl->get_content);
     }
+}
+
+sub __url_encode {
+    my $encode = shift;
+    return () unless defined $encode;
+    $encode
+        =~ s/([^A-Za-z0-9\-_.!~*'() ])/ uc sprintf "%%%02x",ord $1 /eg;
+    $encode =~ tr/ /+/;
+    return $encode;
 }
 
 1;
